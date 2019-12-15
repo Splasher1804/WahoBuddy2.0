@@ -2,93 +2,71 @@ package com.example.wahobuddy20;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Calendar;
-import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
-    InputStream inputStream;
-    String[] ids;
-    TextView myAwesomeTextView = null;
-    TextView text2=null;
-    TextView text3=null;
-    TextView text4=null;
-    TextView text5=null;
-    TextView text6=null;
+import static com.example.wahobuddy20.MainActivity.co;
+import static com.example.wahobuddy20.MainActivity.no;
+import static com.example.wahobuddy20.MainActivity.oz;
+import static com.example.wahobuddy20.MainActivity.pm;
+import static com.example.wahobuddy20.MainActivity.so;
+import static com.example.wahobuddy20.MainActivity.ziuaCurenta;
 
-    static int oz;
-    static int pm;
-    static int co;
-    static int so;
-    static int no;
-    private Button buton;
-    private Button buton2;
-    static Calendar calendar = Calendar.getInstance();
-    static int ziuaCurenta = calendar.get(Calendar.DAY_OF_MONTH);
+public class Main3Activity extends AppCompatActivity {
+    static int m;
+    TextView agloText = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        buton=(Button)findViewById(R.id.button);
-        buton2=(Button)findViewById(R.id.button2);
-        buton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivity2();
-            }
-        });
-        buton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivity2();
-            }
-        });
-        buton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivity3();
-            }
-        });
+        setContentView(R.layout.activity_main3);
+        String[] ids;
+        InputStream inputStream = getResources().openRawResource(R.raw.trafic);
 
-        myAwesomeTextView = (TextView)findViewById(R.id.textView2);
-        text2=(TextView)findViewById(R.id.textView3);
-        text3=(TextView)findViewById(R.id.textView4);
-        text4=(TextView)findViewById(R.id.textView5);
-        text5=(TextView)findViewById(R.id.textView6);
-        text6=(TextView)findViewById(R.id.textView7);
+        int m;
 
-        inputStream = getResources().openRawResource(R.raw.poluare);
+        ImageView im = (ImageView)findViewById(R.id.fatza);
+        if(m<70) {
+            im.setBackgroundResource(R.drawable.green);
+        } else
+        if(m>70 & m <120)
+            im.setBackgroundResource(R.drawable.yellow);
+        else if(m>120)
 
-        //CALENDAR
-
-
+            im.setBackgroundResource(R.drawable.red);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
+        agloText=(TextView)findViewById(R.id.aglo);
         try {
             String csvLine;
             while ((csvLine = reader.readLine()) != null) {
 
 
-
                 ids=csvLine.split(",");
                 try{
-                    String[] parts = ids[7].split("/");
-                    int zi = Integer.parseInt(parts[1]);
 
-                    if(ziuaCurenta==zi)
+                    String[] parts = ids[5].split("T");
+                    String[] parts2 = parts[0].split("-");
+
+                    int zi = Integer.parseInt(parts2[2]);
+                    if(zi==ziuaCurenta)
+                    {
+                        m=Integer.parseInt(ids[6]);
+
+                        if(m>10)
+                            agloText.setText("Evitati utilizarea autovehiculului personal");
+                        else
+                            agloText.setText("Drumul este liber");
+                    }
+
+
+                    /*if(ziuaCurenta==zi)
                     {
 
                         oz=Integer.parseInt(ids[0]);
@@ -101,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
 
                         // myAwesomeTextView.setText(oz);
                         if(oz>100)
-                        myAwesomeTextView.setText("Cantitate mare de Ozon in aer.");
+                            myAwesomeTextView.setText("Cantitate mare de Ozon in aer.");
                         else
-                        myAwesomeTextView.setText("Cantitate OK de Ozon in aer.");
+                            myAwesomeTextView.setText("Cantitate OK de Ozon in aer.");
                         if(pm>25)
                             text2.setText("Cantitate mare de Particule PM2.5 si PM10 in aer.");
                         else
@@ -149,19 +127,5 @@ public class MainActivity extends AppCompatActivity {
         catch (IOException ex) {
             throw new RuntimeException("Error in reading CSV file: "+ex);
         }
-
-
-
-    }
-    public void openActivity3()
-    {
-        Intent intent=new Intent(this, Main3Activity.class);
-        startActivity(intent);
-    }
-    public void openActivity2(){
-        Intent intent=new Intent(this, Main2Activity.class);
-        startActivity(intent);
     }
 }
-
-
