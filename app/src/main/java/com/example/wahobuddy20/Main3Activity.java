@@ -29,18 +29,7 @@ public class Main3Activity extends AppCompatActivity {
         String[] ids;
         InputStream inputStream = getResources().openRawResource(R.raw.trafic);
 
-        int m;
-
-        ImageView im = (ImageView)findViewById(R.id.fatza);
-        if(m<70) {
-            im.setBackgroundResource(R.drawable.green);
-        } else
-        if(m>70 & m <120)
-            im.setBackgroundResource(R.drawable.yellow);
-        else if(m>120)
-
-            im.setBackgroundResource(R.drawable.red);
-
+        ImageView im = (ImageView)findViewById(R.id.Vehicul);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         agloText=(TextView)findViewById(R.id.aglo);
         try {
@@ -60,9 +49,18 @@ public class Main3Activity extends AppCompatActivity {
                         m=Integer.parseInt(ids[6]);
 
                         if(m>10)
-                            agloText.setText("Evitati utilizarea autovehiculului personal");
+                        {
+                            agloText.setText("Numarul de masini din trafic este ridicat.Folositi transportul in comun.\nDrum bun.");
+                            im.setBackgroundResource(R.drawable.bus);
+                        }
+
                         else
-                            agloText.setText("Drumul este liber");
+                        {
+                            agloText.setText("Numarul de masini din trafic este scazut.Puteti folosi masina persoanala.\nDrum bun");
+                            im.setBackgroundResource(R.drawable.logan);
+                        }
+
+                        break;
                     }
 
 

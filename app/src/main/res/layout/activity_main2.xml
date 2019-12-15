@@ -146,4 +146,19 @@
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="283dp"
+        android:layout_height="57dp"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:text="Informatii Substante"
+        android:textColor="#4A2AB3"
+        android:textColorHighlight="#E1CA1762"
+        app:layout_constraintBottom_toTopOf="@+id/ozon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.595"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.758" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
